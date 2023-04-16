@@ -17,6 +17,7 @@ public:
 	void render();
 	void clean();
 	void handleInput();
+	SDL_Renderer* getRenderer();
 
 	//static SDL_Renderer* renderer;
 

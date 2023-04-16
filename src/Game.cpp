@@ -60,6 +60,10 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 	//SDL_EnableKeyRepeat(0,0);
 };
 
+SDL_Renderer* Game::getRenderer() {
+	return renderer;
+}
+
 void Game::handleEvents()
 {
 	SDL_Event event;
