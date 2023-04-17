@@ -5,6 +5,7 @@ Bullet::Bullet(SDL_Renderer* ren) {
 }
 Bullet::~Bullet() {
     //std::cout << "poof @ " << position.x << " " << position.y << std::endl;
+    SDL_DestroyTexture(tex);
 }
 Bullet::Bullet(SDL_Renderer *&ren, Vector2d pos, Vector2d vel)
 : renderer(ren), position(pos), velocity(vel) {
