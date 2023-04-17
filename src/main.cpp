@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
         while (accumulator >= TIMESTEP)
         {
             game->handleEvents();
+            game->update();
             accumulator -= TIMESTEP;
         }
-        game->update();
         game->render();
 
         //std::cout << a++ << std::endl;

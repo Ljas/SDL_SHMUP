@@ -3,6 +3,8 @@
 #include <iostream>
 #include <SDL2/SDL_image.h>
 #include "Math.h"
+#include "EntityManager.h"
+#include "Bullet.h"
 
 class Game
 {
@@ -26,6 +28,7 @@ public:
 		return isRunning;
 	};
 private:
+	SDL_Texture* tex;
 	bool isRunning = 0;
 	SDL_Window* window;
 };

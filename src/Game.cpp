@@ -1,7 +1,8 @@
 #include "Game.h"
+#include "Utils.h"
 
 SDL_Renderer* renderer;
-SDL_Texture* tex;
+
 static int SCALE = 1;
 SDL_Rect src;
 SDL_Rect dst;
@@ -9,6 +10,10 @@ double playerX = 0;
 double playerY = 0;
 const int PLAYERSPEED = 4;
 int playerSpeed = PLAYERSPEED;
+EntityManager *manager;
+const double TIMESTEP = 0.001;
+    double accumulator = 0.0;
+    double currentTime = Utils::hireTimeInSeconds();
 
 Game::Game(){
 	};
@@ -53,9 +58,10 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
         std::cout << "Problem! " << IMG_GetError() << std::endl;
     }
 	
-	dst.x = 100;
-	dst.y = 100;
+	dst.x = 300;
+	dst.y = 400;
 
+	manager = new EntityManager(renderer);
 
 	//SDL_EnableKeyRepeat(0,0);
 };
@@ -110,6 +116,19 @@ void Game::handleInput() {
 void Game::update()
 {
 
+	double newTime = Utils::hireTimeInSeconds();
+        double frameTime = newTime - currentTime;
+        currentTime = newTime;
+        accumulator += frameTime;
+	if(accumulator >= TIMESTEP) {
+		
+		manager->CreateTestBullet();
+		
+		accumulator -= TIMESTEP;
+		
+	}
+	manager->Update();	
+
 };
 
 void Game::render()
@@ -126,10 +145,11 @@ void Game::render()
 	
 	dst.x += playerX * playerSpeed;
 	dst.y += playerY * playerSpeed;
-	std::cout << dst.x << " " << playerX << " " << dst.y << " " << playerY << " " << playerSpeed << std::endl;
+	//std::cout << dst.x << " " << playerX << " " << dst.y << " " << playerY << " " << playerSpeed << std::endl;
 	dst.w = 32 * SCALE;
 	dst.h = 32 * SCALE;
     SDL_RenderCopy(renderer, tex, &src, &dst);
+	manager->Render();
     
 
 	SDL_RenderPresent(renderer);
@@ -137,6 +157,7 @@ void Game::render()
 
 void Game::clean()
 {
+	delete manager;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(tex);

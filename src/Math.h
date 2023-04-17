@@ -16,5 +16,10 @@ struct Vector2d
 		std::cout << x << ", " << y << std::endl;
 	}
 
+	Vector2d(Vector2d a, Vector2d b)
+		:x(a.x + b.x), y(a.y + b.y) {
+
+	}
+
 	double x, y;
 };
