@@ -1,5 +1,9 @@
 #pragma once
 #include <iostream>
+static int PLAYFIELD_LEFT = 16;
+static int PLAYFIELD_TOP = 16;
+static int PLAYFIELD_RIGHT = 352;
+static int PLAYFIELD_BOTTOM = 464;
 
 struct Vector2d
 {

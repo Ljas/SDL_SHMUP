@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "Utils.h"
 
-const int WIDTH = 800, HEIGHT = 600;
+const int WIDTH = 1280, HEIGHT = 960;
 Game* game = nullptr;
 //int a = 0;
 

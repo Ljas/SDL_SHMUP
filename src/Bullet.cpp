@@ -17,6 +17,16 @@ Bullet::Bullet(SDL_Renderer *&ren, Vector2d pos, Vector2d vel)
     }
 }
 
+Bullet::Bullet(SDL_Renderer *&ren, Vector2d pos, Vector2d vel, const char text[], int size)
+: renderer(ren), position(pos), velocity(vel), bulletSize(size) {
+
+    
+    tex = IMG_LoadTexture(renderer, text);
+    if(tex == NULL) {
+        std::cout << "TexFail " << SDL_GetError() << std::endl;
+    }
+}
+
 Vector2d Bullet::getPosition() {
     return position;
 }
@@ -26,7 +36,7 @@ Vector2d Bullet::getVelocity() {
 }
 
 bool Bullet::Update() {
-    if((position.x > 800 | position.y > 600 | position.x < -100 | position.y < -100)) {
+    if((position.x > PLAYFIELD_RIGHT + 64 | position.y > PLAYFIELD_BOTTOM + 64 | position.x < PLAYFIELD_LEFT - 64 | position.y < PLAYFIELD_TOP - 64)) {
         isDestroyed = true;
     }
     else isDestroyed = false;
@@ -44,11 +54,11 @@ void Bullet::Render() {
 
     src.x = 0;
     src.y = 0;
-    src.w = 16;
-    src.h = 16;
+    src.w = bulletSize;
+    src.h = bulletSize;
 
-    dst.x = position.x;
-    dst.y = position.y;
+    dst.x = position.x - (bulletSize / 2);
+    dst.y = position.y - (bulletSize / 2);
     dst.w = 8;
     dst.h = 8;
 

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 
+
 class Player {
     public:
         Player();
@@ -15,6 +16,7 @@ class Player {
 
         Vector2d getPosition();
         Vector2d getVelocity();
+        bool getFireStatus();
         bool Update();
         void Render();
         void HandleInput();
@@ -26,4 +28,5 @@ class Player {
     bool isDestroyed = 0;
     const double PLAYERSPEED = 2;
     double playerSpeed = PLAYERSPEED;
+    bool fire = 0;
 };

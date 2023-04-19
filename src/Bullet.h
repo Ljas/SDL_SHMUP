@@ -12,6 +12,7 @@ class Bullet {
         Bullet(SDL_Renderer* ren);
         ~Bullet();
         Bullet(SDL_Renderer* &ren, Vector2d pos, Vector2d vel);
+        Bullet(SDL_Renderer* &ren, Vector2d pos, Vector2d vel, const char text[], int size);
 
         Vector2d getPosition();
         Vector2d getVelocity();
@@ -23,4 +24,5 @@ class Bullet {
     Vector2d position;
     Vector2d velocity;
     bool isDestroyed = 0;
+    int bulletSize = 16;
 };

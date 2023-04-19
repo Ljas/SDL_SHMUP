@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <list>
 #include "Player.h"
+#include "Utils.h"
 //Bullet[] bulletArray;
 
 
@@ -17,12 +18,14 @@ class EntityManager {
         ~EntityManager();
 
         int CreateTestBullet();
+        void CreateTestShot();
         void InitPlayer();
         void Update();
         void Render();
     private:
         SDL_Renderer* renderer;
         std::list<Bullet> bullets;
+        std::list<Bullet> playerShots;
         int bulletIndex = 0;
         Player* player;
         

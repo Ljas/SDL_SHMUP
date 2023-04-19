@@ -12,8 +12,8 @@ const int PLAYERSPEED = 4;
 int playerSpeed = PLAYERSPEED;
 EntityManager *manager;
 const double TIMESTEP = 0.001;
-    double accumulator = 0.0;
-    double currentTime = Utils::hireTimeInSeconds();
+double accumulator = 0.0;
+double currentTime = Utils::hireTimeInSeconds();
 
 Game::Game(){
 	};
@@ -53,13 +53,16 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
     if(!(IMG_Init(IMG_INIT_PNG)))
         std::cout << "IMG_Init initialization error: " << SDL_GetError() << std::endl;
 
-    tex = IMG_LoadTexture(renderer, "assets/ship.png");
+    tex = IMG_LoadTexture(renderer, "assets/gameplayUI.png");
     if(tex == NULL) {
         std::cout << "Problem! " << IMG_GetError() << std::endl;
     }
 	
-	dst.x = 300;
-	dst.y = 400;
+	//dst.x = 300;
+	//dst.y = 200;
+	int w = 640;
+	int h = 480;
+	SDL_RenderSetLogicalSize(renderer, w, h);
 
 	manager = new EntityManager(renderer);
 	manager->InitPlayer();
@@ -137,22 +140,22 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//add stuff to render
 
-    /*
-	src.x = 0;
-	src.y = 0;
-	src.w = 32;
-	src.h = 32;
+    // render UI
 	
-	dst.x += playerX * playerSpeed;
-	dst.y += playerY * playerSpeed;
-	//std::cout << dst.x << " " << playerX << " " << dst.y << " " << playerY << " " << playerSpeed << std::endl;
-	dst.w = 32 * SCALE;
-	dst.h = 32 * SCALE;
-    SDL_RenderCopy(renderer, tex, &src, &dst);
-	*/
+	
 	manager->Render();
     
+	src.x = 0;
+	src.y = 0;
+	src.w = 640;
+	src.h = 480;
+	
+	dst.x += 0;
+	dst.y += 0;
 
+	dst.w = 640;
+	dst.h = 480;
+    SDL_RenderCopy(renderer, tex, &src, &dst);
 	SDL_RenderPresent(renderer);
 };
 
