@@ -62,7 +62,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 	dst.y = 400;
 
 	manager = new EntityManager(renderer);
-
+	manager->InitPlayer();
 	//SDL_EnableKeyRepeat(0,0);
 };
 
@@ -82,7 +82,7 @@ void Game::handleEvents()
 	default:
 		break;
 	}
-	handleInput();
+	//handleInput();
 };
 
 void Game::handleInput() {
@@ -137,7 +137,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//add stuff to render
 
-    
+    /*
 	src.x = 0;
 	src.y = 0;
 	src.w = 32;
@@ -149,6 +149,7 @@ void Game::render()
 	dst.w = 32 * SCALE;
 	dst.h = 32 * SCALE;
     SDL_RenderCopy(renderer, tex, &src, &dst);
+	*/
 	manager->Render();
     
 

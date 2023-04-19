@@ -5,6 +5,7 @@
 #include "Math.h"
 #include "EntityManager.h"
 #include "Bullet.h"
+#include "Player.h"
 
 class Game
 {

@@ -1,7 +1,9 @@
 #include "EntityManager.h"
 
 EntityManager::EntityManager() {};
-EntityManager::~EntityManager() {};
+EntityManager::~EntityManager() {
+    delete player;
+};
 EntityManager::EntityManager(SDL_Renderer* &ren)
 : renderer(ren) {
 
@@ -19,6 +21,11 @@ int EntityManager::CreateTestBullet() {
     //std::cout << bullets.size() << std::endl;    
     //delete bullet;
     return 0;
+}
+
+void EntityManager::InitPlayer() {
+    player = new Player(renderer, Vector2d(400, 500));
+    std::cout << "Player initialized" << std::endl;
 }
 
 void EntityManager::Update() {
@@ -41,10 +48,13 @@ void EntityManager::Update() {
     }
     }
 
-
+    player->HandleInput();
+    player->Update();
 }
 
 void EntityManager::Render() {
+    player->Render();
+
     std::list< Bullet >::iterator iter = bullets.begin();
     std::list< Bullet >::iterator end  = bullets.end();
 
