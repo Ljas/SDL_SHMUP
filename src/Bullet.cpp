@@ -35,11 +35,14 @@ Vector2d Bullet::getVelocity() {
     return velocity;
 }
 
+void Bullet::setDestroyed() {
+    isDestroyed = true;
+}
+
 bool Bullet::Update() {
     if((position.x > PLAYFIELD_RIGHT + 64 | position.y > PLAYFIELD_BOTTOM + 64 | position.x < PLAYFIELD_LEFT - 64 | position.y < PLAYFIELD_TOP - 64)) {
         isDestroyed = true;
     }
-    else isDestroyed = false;
 
     position.x += velocity.x / 100;
     position.y += velocity.y / 100;
@@ -57,10 +60,14 @@ void Bullet::Render() {
     src.w = bulletSize;
     src.h = bulletSize;
 
-    dst.x = position.x - (bulletSize / 2);
-    dst.y = position.y - (bulletSize / 2);
+    dst.x = position.x - (bulletSize / 4);
+    dst.y = position.y - (bulletSize / 4);
     dst.w = 8;
     dst.h = 8;
 
     SDL_RenderCopy(renderer, tex, &src, &dst);
+}
+
+double Bullet::getRadius() {
+    return bulletSize  / 4;
 }

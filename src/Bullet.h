@@ -16,6 +16,8 @@ class Bullet {
 
         Vector2d getPosition();
         Vector2d getVelocity();
+        void setDestroyed();
+        double getRadius();
         bool Update();
         void Render();
     private:

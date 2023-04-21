@@ -6,6 +6,7 @@ Player::Player() {}
 Player::Player(SDL_Renderer* ren) {}
 
 Player::~Player() {
+    SDL_DestroyTexture(tex);
 }
 
 Player::Player(SDL_Renderer* &ren, Vector2d pos) {
@@ -58,16 +59,16 @@ bool Player::Update() {
         velocity.y *= 0.7071;
     }
 
-    if(position.x < PLAYFIELD_LEFT && velocity.x < 0) velocity.x = 0;
-    if(position.y < PLAYFIELD_TOP && velocity.y < 0) velocity.y = 0;
+    if(position.x < PLAYFIELD_LEFT + 13 && velocity.x < 0) velocity.x = 0;
+    if(position.y < PLAYFIELD_TOP + 16 && velocity.y < 0) velocity.y = 0;
     
-    if(position.x > (PLAYFIELD_RIGHT) - 26 && velocity.x > 0) velocity.x = 0;
-    if(position.y > (PLAYFIELD_BOTTOM) - 32 && velocity.y > 0) velocity.y = 0;
+    if(position.x > (PLAYFIELD_RIGHT - 13) && velocity.x > 0) velocity.x = 0;
+    if(position.y > (PLAYFIELD_BOTTOM - 16) && velocity.y > 0) velocity.y = 0;
 
     position.x += velocity.x * playerSpeed;
     position.y += velocity.y * playerSpeed;
 
-
+    //isDestroyed = 0;
     return isDestroyed;
 }
 
@@ -81,8 +82,8 @@ void Player::Render() {
     src.w = 26;
     src.h = 32;
 
-    dst.x = position.x;
-    dst.y = position.y;
+    dst.x = position.x - 13;
+    dst.y = position.y - 16;
     dst.w = 26;
     dst.h = 32;
 

@@ -11,7 +11,7 @@ double playerY = 0;
 const int PLAYERSPEED = 4;
 int playerSpeed = PLAYERSPEED;
 EntityManager *manager;
-const double TIMESTEP = 0.001;
+const double TIMESTEP = 1.0;
 double accumulator = 0.0;
 double currentTime = Utils::hireTimeInSeconds();
 
@@ -120,12 +120,13 @@ void Game::update()
 {
 
 	double newTime = Utils::hireTimeInSeconds();
-        double frameTime = newTime - currentTime;
-        currentTime = newTime;
-        accumulator += frameTime;
+    double frameTime = newTime - currentTime;
+    currentTime = newTime;
+    accumulator += frameTime;
 	if(accumulator >= TIMESTEP) {
 		
-		manager->CreateTestBullet();
+		//manager->CreateTestBullet();
+		manager->CreateTestEnemy();
 		
 		accumulator -= TIMESTEP;
 		

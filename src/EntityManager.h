@@ -8,6 +8,8 @@
 #include <list>
 #include "Player.h"
 #include "Utils.h"
+#include "Enemy.h"
+#include <cmath>
 //Bullet[] bulletArray;
 
 
@@ -22,10 +24,14 @@ class EntityManager {
         void InitPlayer();
         void Update();
         void Render();
+        void PlayerCollision(Bullet &bullet);
+        void CreateTestEnemy();
+        void EnemyCollision();
     private:
         SDL_Renderer* renderer;
         std::list<Bullet> bullets;
         std::list<Bullet> playerShots;
+        std::list<Enemy> enemies;
         int bulletIndex = 0;
         Player* player;
         
