@@ -19,7 +19,7 @@ class Enemy {
         Vector2d getVelocity();
         int getFireStatus();
         void setDestroyed();
-        void takeHit();
+        void takeHit(int damage);
         bool Update();
         void Render();
     private:
@@ -35,5 +35,5 @@ class Enemy {
     double currentTime = Utils::hireTimeInSeconds();
     double accumulator = 0.0;
     const int radius = 12;
-    int HP = 5;
+    int HP = 50;
 };

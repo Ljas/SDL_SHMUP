@@ -20,6 +20,7 @@ class Player {
         bool Update();
         void Render();
         void HandleInput();
+        void TakeHit(int damage);
     private:
     SDL_Renderer* renderer;
     SDL_Texture* tex;
@@ -29,4 +30,5 @@ class Player {
     const double PLAYERSPEED = 2;
     double playerSpeed = PLAYERSPEED;
     bool fire = 0;
+    int power = 10;
 };

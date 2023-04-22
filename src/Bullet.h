@@ -20,6 +20,7 @@ class Bullet {
         double getRadius();
         bool Update();
         void Render();
+        int getDamage();
     private:
     SDL_Renderer* renderer;
     SDL_Texture* tex;
@@ -27,4 +28,5 @@ class Bullet {
     Vector2d velocity;
     bool isDestroyed = 0;
     int bulletSize = 16;
+    int damage = 10;
 };

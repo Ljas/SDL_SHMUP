@@ -22,6 +22,7 @@ Player::Player(SDL_Renderer* &ren, Vector2d pos) {
 }
 
 void Player::HandleInput() {
+    if (isDestroyed) return;
     const Uint8* keystates = SDL_GetKeyboardState(NULL); 
 
 	playerSpeed = PLAYERSPEED;
@@ -100,4 +101,9 @@ Vector2d Player::getPosition() {
 
 Vector2d Player::getVelocity() {
     return velocity;
+}
+
+void Player::TakeHit(int dmg) {
+    power -= dmg;
+    if (power < 1) isDestroyed = true;
 }

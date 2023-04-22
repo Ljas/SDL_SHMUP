@@ -83,7 +83,7 @@ void Enemy::setDestroyed() {
     isDestroyed = true;
 }
 
-void Enemy::takeHit() {
-    HP--;
+void Enemy::takeHit(int dmg) {
+    HP -= dmg;
     if (HP < 1) setDestroyed();
 }

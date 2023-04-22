@@ -34,5 +34,6 @@ class EntityManager {
         std::list<Enemy> enemies;
         int bulletIndex = 0;
         Player* player;
+        bool playerDead = 0;
         
 };

@@ -135,7 +135,7 @@ void EntityManager::Update() {
                 velX /= hypo;
                 velY /= hypo;
               
-                bullets.emplace_back(renderer, Vector2d(iterE->getPosition().x,iterE->getPosition().y), Vector2d(velX,velY), "assets/basicBullet.png", 16);
+                if(!playerDead) bullets.emplace_back(renderer, Vector2d(iterE->getPosition().x,iterE->getPosition().y), Vector2d(velX,velY), "assets/basicBullet.png", 16);
             }
             ++iterE;
         }
@@ -158,7 +158,10 @@ void EntityManager::Update() {
 
     player->HandleInput();
     
-    player->Update();
+    if(player->Update()) {
+        delete player;
+        playerDead = true;
+    }
 
     EnemyCollision();
 }
@@ -211,6 +214,7 @@ void EntityManager::PlayerCollision(Bullet &bullet) {
     double distance = std::hypot(xDist, yDist);
 
     if (distance < (bullet.getRadius() + 6)) {
+        player->TakeHit(bullet.getDamage());
         bullet.setDestroyed();
         //std::cout << player->getPosition().x << " " << player->getPosition().y << " || " << bCenterX << " " << bCenterY << " || " << distance << std::endl;
     }
@@ -246,7 +250,7 @@ void EntityManager::EnemyCollision() {
         if (distance < (bRadius + eRadius)) {
             
             iter->setDestroyed();
-            iterE->takeHit();
+            iterE->takeHit(iter->getDamage());
             
         }
             

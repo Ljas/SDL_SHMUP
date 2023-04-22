@@ -51,6 +51,10 @@ bool Bullet::Update() {
     return isDestroyed;
 }
 
+int Bullet::getDamage() {
+    return damage;
+}
+
 void Bullet::Render() {
     SDL_Rect src;
     SDL_Rect dst;
